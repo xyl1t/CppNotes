@@ -1,0 +1,165 @@
+html {
+    margin: 0;
+    padding: 0;
+
+    font-family: Verdana, Tahoma, sans-serif;
+    font-size: 13px;
+}
+
+body {
+    margin: 0;
+    padding:0;
+    background-color: #f0f0f0;
+    margin: 24px;
+}
+
+h1 {
+    text-align: center;
+}
+
+p {
+    font-size: 13px;
+    margin: 0;
+    margin-bottom: 6px;
+}
+
+#contents {
+    background-color: #FFF;
+    margin: 0 auto;
+    margin-bottom: 24px;
+    padding: 8px;
+    padding-right: 16px;
+    box-shadow: #CCC 0px 0px 2px 1px;
+    border: lightgray dashed 1px;
+    width: calc(100% - 24px);
+    /*min-width: 600px;*/
+    max-width: 800px;
+    
+    
+}
+#contents h3 {
+    /*background-color: lightblue;*/
+    font-weight: normal;
+    margin: 0px;
+    margin-bottom: 8px;
+}
+#contents a {
+    color: #0645AD;
+    text-decoration: none;
+}
+#contents a:hover {
+    text-decoration: underline;
+}
+
+.content {
+    background-color: #fff;
+    margin: 0 auto;
+    margin-bottom: 24px;
+    padding: 16px;
+    box-shadow: #CCC 0px 1px 4px 2px;
+    border-radius: 2px;
+    width:auto;
+    /*min-width: 600px;*/
+    max-width: 800px;
+}
+.content h2 {
+    display:inline-block;
+    /*background-color:lightblue;*/
+    margin:0px;
+    padding:0px;
+}
+.content h3 {
+    /*background-color:lightgreen;*/
+    display:inline-block;
+    font-weight: normal;
+    font-size:1em;
+    color: darkgray;
+    margin:0px;
+    padding:0px;
+    margin-bottom: 24px;
+    margin-left: 8px;
+}
+
+.codeSnippet {
+    font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+    padding: 2px;
+    background-color:#F0F0F0; 
+}
+.output {
+    margin: 8px 0px;
+    margin-bottom:24px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size:14px;
+}
+
+/* INFO BOX - BEGIN */ 
+.infBox  {
+    margin:16px 0;
+    padding: 8px;
+    background-color: #F0F0F0;
+    border-radius: 6px;
+    border: gray solid 1px;
+    box-shadow: darkgray 0px 0px 4px 1px;
+}
+.infBox.important {
+    background-color:#FFD0CF;
+    box-shadow: #FFD0CF 0px 0px 4px 1px;
+}
+.infBox.note {
+    background-color:#FFFFDD;
+    box-shadow: #FFFFDD 0px 0px 4px 1px;
+}
+.infBox.bestPractice {
+    background-color:#CCFFDD;
+    box-shadow: #CCFFDD 0px 0px 4px 1px;
+}
+.infBox h5, .infBox h4{
+    /*background-color:lightblue;*/
+    margin: 0px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    padding: 0px;
+    padding-bottom: 16px;
+
+    border-bottom: darkgray solid 1px;
+}
+/* INFO BOX - END */
+
+.small{
+    font-size:9px;
+}
+
+h3 {
+    margin: 0px;
+    padding: 0px;
+
+    margin-bottom: 24px;
+}
+
+ul, ol {
+    margin: 0px;
+    padding: 0px;
+}
+ul {
+    padding-left: 16px;
+}
+ol {
+    padding-left: 24px;
+}
+
+pre {
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+@media (min-width:82em) {
+    #contents {
+        float: left;
+        width: 192px;
+
+        margin-left: calc((100% - 800px) / 2 - 250px);
+    }
+}

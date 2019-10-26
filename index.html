@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>C++ Notes</title>
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+        <link rel="stylesheet" href="./styles/main.css" type="text/css"/>
+        
+    </head>
+
+    <body>
+        <h1>C++ Notes</h1>
+        <div id="contents">
+            <h3>Contents</h3>
+            <ol>
+                <li><a href="#const_modifier_on_types">Const modifier on types</a></li>
+                <li><a href="#how_bool_works">How bool works</a></li>
+                <li><a href="#static_array_initialization">Static array initialization</a></li>
+                <li><a href="#default_parameters">Default parameters</a></li>
+                <li><a href="#inline_functions">Inline functions</a></li>
+                <li><a href="#function_overloading_with_pointer_arguments">Function overloading with pointer arguments</a></li>
+            </ol>
+        </div>
+        
+
+        <!-- CONST MODIFIER ON TYPES ------------------------------------------------------------------------------>
+        <div id="const_modifier_on_types" class="content">
+            <h2>Const modifier on types</h2>
+            <h3>20.10.2019</h3>
+            <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+int* const ptr</pre>
+            <p>
+                Address is modifiable. Value is not modifiable.
+            </p>
+            <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+const int* ptr</pre>
+            <p>
+                Address is not modifiable. Value is modifiable.
+            </p>
+        </div>
+
+
+        <!--HOW BOOL WORKS ------------------------------------------------------------------------------>
+        <div id="how_bool_works" class="content">
+            <h2>How bool works</h2>
+            <h3>20.10.2019</h3>
+            <p>For the type <span class="codeSnippet">bool</span>, 0 is interpreted as <span class="codeSnippet">false</span> and every other value as <span class="codeSnippet">true</span>.</p>
+            <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+if(0) // false
+{
+    ...
+}
+if(1) // true
+{
+    ...
+}
+if(28) // true
+{
+    ...
+}
+if(-892) // true
+{
+    ...
+}</pre>
+        </div>
+
+
+        <!-- STATIC ARRAY INITIALIZATION ------------------------------------------------------------------------------>
+        <div id="static_array_initialization" class="content">
+            
+            <h2>Static array initialization</h2>
+            <h3>20.10.2019</h3>
+
+            <p>
+                This is how you initialize a basic array:
+            </p>
+            <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+int myArray[5];</pre>
+            <p>
+                First goes the type, second the name and then the opening and closing square brackets.
+                Inside those brackets you set the amount of elements you want the array to have.
+            </p>
+            <div class="infBox important">
+                <h4>Important</h4>
+                <p>
+                    The length of the array has to be known at compile time!
+                    Some reasons are:
+                    compiler optimization, simplicity, having the ability to get the length of the array.
+                </p>
+            </div>
+            <p>
+                In order to get the length of the array, that is, the amount of array 
+                elements you use the <span class="codeSnippet">sizeof()</span> keyword.
+            </p>
+            <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+int myArray[5];
+int arrayLength = sizeof(myArray) / sizeof(myArray[0]);
+std::cout << "The length of the array is: " << arrayLength << '\n';</pre>
+            <p>
+                The output is:
+            </p>
+            <p class="output">
+                The length of the array is: 5
+            </p>
+            <p>
+                By using this kind of initialization, the elements are being<mark> uninitialized </mark>, i.e. they contain old/garabge values.
+                But there is also another way of initializing an array.
+            </p>
+            <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+int myArray[] = { 5, 82, 0, 32, 197 }; // Elements: 5, 82, 0, 32, 197
+int myArray[] { 5, 82, 0, 32, 197 };   // Elements: 5, 82, 0, 32, 197
+int myArray[5] { 5, 82, 0, 32, 197 };  // Elements: 5, 82, 0, 32, 197
+int myArray[5] { 5, 82 };              // Elements: 5, 82, 0,  0,   0</pre>
+            <p>
+                These are the three other ways you can initialize the array, but this time you also initialize the elements to whatever
+                you want them to be. Notice, if you set the size of the array and then you initialize only some elements, the rest will be initialized to 0.<br>
+                This gives a great opportunity to simply quickly initialize all elements to 0 by doing this:
+            </p>
+            <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+int myArray[5] = { 0 }; // Elements: 0, 0, 0, 0, 0
+int myArray[5] = { };   // Elements: 0, 0, 0, 0, 0</pre>
+            <p>
+                As you can see, all elements are initialized to 0.
+            </p>
+            <div class="infBox bestPractice">
+                <h4>Best practice</h4>
+                <p>
+                    Use the first method to initialize the array to 0 because it is the most readable.
+                </p>
+            </div>
+            <br>
+            <p>
+                Using variables for the size of the array can be usefull, but you can't just 
+                use any variable, the variable has to be constant!
+            </p>
+            <pre class="prettyprint lang-cpp customCode" style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+const int SIZE = 10;
+int myArray[SIZE] = { 0 };</pre> 
+            <p>
+                Again, the variable has to be constant because the value has to be known at compile time.
+                Alternativly you could also use <span class="codeSnippet">#define</span> macros.
+            </p>
+            <pre class="prettyprint lang-cpp customCode" style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+#define SIZE = 10
+int myArray[SIZE] = { 0 };</pre> 
+            <p>
+                This will just replace every occurence of the <span class="codeSnippet">SIZE</span> with the value 10
+            </p>
+            <p>
+                Initializing 2d arrays or array-of-arrays works pretty much the same way:
+            </p>
+            <pre class="prettyprint lang-cpp customCode" style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+int arr[2][3] = { };       // This will initialize all elements with 0.
+int arr[2][3] = { { } };   // This will initialize all elements with 0, but 
+                           // you explicitly say that you want the first 
+                           // array to be initialized to 0 too.
+int arr[2][3] = { { 4 } }; // This initializes the first element of the 
+                           // first array with 4, and the rest with 0</pre> 
+            <p>
+                You can also initialize a 2d array without specifying the number of rows.
+            </p>
+            <pre class="prettyprint lang-cpp customCode" style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+int arr[][3] =
+{
+    { 10, 23, 7 },
+    { 0, 17, 65 },
+    { 57, 67, 2 },
+    { 4, 1, 41 },
+};</pre> 
+            <p>
+                In this case the columns would be 3 and rows 4.<br>
+                You can't do the same with columns though, because it won't know then how to handle this case:                   
+            </p>
+            <pre class="prettyprint lang-cpp customCode" style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+// This snippet is illegal in C++
+int arr[2][] =
+{ 
+    { },
+    { }
+}</pre>    
+            <p>
+                How many columns should it initialize with 0? It doesn't know, and that's why you can't do that.
+            </p>
+            <div class="infBox note">
+                <h4>Note</h4>
+                <p>
+                    In C++ it is illegal to declare an array of zero length. 
+                    As such it is not normally considered a good practice as you 
+                    are tying your code to a particular compiler extension. 
+                    Many uses of dynamically sized arrays are better replaced 
+                    with a container class such as std::vector. <a href="https://stackoverflow.com/a/6180200/10187214" class="small">Source</a>
+                </p>
+            </div>
+        </div>
+
+
+        <!-- DEFAULT PARAMETETS ------------------------------------------------------------------------------>
+        <div id="default_parameters" class="content">
+            <h2>Default parameters</h2>
+            <h3>20.10.2019</h3>
+            <a href="https://www.learncpp.com/cpp-tutorial/77-default-arguments/" class="small">Source</a> 
+            <p>
+                Default parameters are parameters that have a default value with the user doesn't give any argument.
+                A default parameter is also often called an <strong>optional parameter</strong> because the user doesn't have to supply the parameter with a value.<br>
+                Example:
+            </p>
+            <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+void printValues(int x=10, int y=20, int z=30)
+{
+    std::cout << "x: " << x << '\n';
+    std::cout << "y: " << y << '\n';
+}
+
+int main()
+{
+    printValues(1); // y will use default argument 10
+    printValues(3, 4); // y will use user-supplied argument 4
+}</pre>
+
+            <p>
+                The output is:
+            </p>
+            <pre class="output">
+x: 1
+y: 10
+x: 3
+y: 4
+            </pre>
+            
+            <strong>Rules</strong>
+            <ol>
+                <li>
+                    You can have multiple default parameters<br>With these rules:
+                    <ul>
+                        <li>All default arguments must be for the rightmost parameters. The following is not allowed
+                            <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+void printValue(int x=10, int y); // not allowed</pre></li>
+                        <li>If more than one default argument exists, the leftmost default argument should be the one most likely to be explicitly set by the user.</li>
+                    </ul>
+                </li>
+                <li>Default parameters can only be declared once
+<pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+void printValues(int x, int y=10); 
+void printValues(int x, int y=10) // error: redefinition of default argument
+{
+    std::cout << "x: " << x << '\n';
+    std::cout << "y: " << y << '\n';
+}</pre>
+                </li>
+                <li>
+                    Default parameters and function overloading
+                    <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+void printValues(int x);
+void printValues(int x, int y=20);</pre>
+                    This is<mark> not </mark>allowed because when the caller were to call printValues(10) the compiler wouldn't be able to determine whether the user wanted
+                    printValues(10) or printValues(10, 20) with the default vlaue.
+                </li>
+            </ol>
+        </div>
+
+
+        <!-- INLINE FUNCTIONS ------------------------------------------------------------------------------>
+        <div id="inline_functions" class="content">
+            <h2>Inline functions</h2>
+            <h3>20.10.2019</h3>
+            <a href="https://www.learncpp.com/cpp-tutorial/75-inline-functions/" class="small">Source</a>
+            <p>
+                Every time a function is called, there is a certain amount of performance overhead that occurs. 
+                This is because the CPU must store the address of the current instruction it is executing (so it knows where to return to later) 
+                along with other registers, all the function parameters must be created and assigned values, 
+                and the program has to branch to a new location. Code written <mark>in-place is significantly faster</mark>.
+            </p>
+            <p>
+                Functions are usually inlined when their task is <mark>small, commoly-used</mark>. Making those kind of functions inlined can substantialy increase the speed of the function.
+                <br>
+                The function is inlined in a way that it is replaced with a copy of the contents of the function itself, which removes the function call overhead! 
+                The only downside is that because of the inline the<mark> compiled code gets more bloated</mark>, and bloated code means more page loads which adds overhead.
+            </p>
+            <div class="infBox note">
+                <h4>Note</h4>
+                <p>
+                    The compiler is free to ignore the inline keyword.<br>
+                    Smart/Modern compilers can even inline functions automatically, even better than humans in most cases.
+                </p>
+            </div>
+            <p>
+                Let's look at an example:
+            </p>
+            <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+int min(int x, int y)
+{
+    return x > y ? y : x;
+}
+
+int main()
+{
+    std::cout << min(5, 6) << '\n';
+    std::cout << min(3, 2) << '\n';
+    return 0;
+}</pre>
+            <p> 
+                After compilation the machine code will be created in the way as if main() looked like this:
+            </p>
+            <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+int main()
+{
+    std::cout << (5 > 6 ? 6 : 5) << '\n';
+    std::cout << (3 > 2 ? 2 : 3) << '\n';
+    return 0;
+}</pre>
+            <p>
+                This will execute quite a bit faster, at the cost of the<mark> compiled code being slightly larger.</mark> 
+            </p>
+        </div>
+
+        <!-- FUNCTION OVERLOADING ------------------------------------------------------------------------------>
+        <div id="function_overloading_with_pointer_arguments" class="content">
+            <h2>Function overloading with pointer arguments</h2>
+            <h3>20.10.2019</h3>
+            <p>
+                Let's say we have a function that has pointer arguments, and has been overloaded:
+            </p>
+            <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+void func(int a, int num)
+{
+    // ...
+}
+void func(int a, int *ptr)
+{
+    // ...
+}</pre>
+            <p>
+                Now, if we call the function like this:
+            </p>
+            <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+func(3, NULL);
+</pre>
+            <p>
+                The <span class="codeSnippet">NULL</span> will turn into a 0, and thus the first overload will be called (void func(int a, int num)).
+                If you want to call the second overload, you have to use <span class="codeSnippet">nullptr</span>.
+                <span class="codeSnippet">nullptr</span> is an instance of a pointer type.
+                The same way  <span class="codeSnippet">true</span> and <span class="codeSnippet">false</span> are instances of the type <span class="codeSnippet">bool</span>.
+            </p>
+        </div>
+    </body>
+</html>
