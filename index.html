@@ -13,6 +13,7 @@
         <div id="contents">
             <h3>Contents</h3>
             <ol>
+                <li><a href="#use_a_pointer_as_an_array">Use a pointer as an array</a></li>
                 <li><a href="#const_modifier_on_types">Const modifier on types</a></li>
                 <li><a href="#how_bool_works">How bool works</a></li>
                 <li><a href="#static_array_initialization">Static array initialization</a></li>
@@ -20,6 +21,24 @@
                 <li><a href="#inline_functions">Inline functions</a></li>
                 <li><a href="#function_overloading_with_pointer_arguments">Function overloading with pointer arguments</a></li>
             </ol>
+        </div>
+        
+
+        <!-- USE A POINTER AS AN ARRAY ------------------------------------------------------------------------------>
+        <div id="use_a_pointer_as_an_array" class="content">
+            <h2>Use a pointer as an array</h2>
+            <h3>26.10.2019</h3>
+            <p>
+                An array is basically a<mark> constant address/pointer with contiguous memory.</mark>
+                There is a simple formula on how to access the elements through a pointer or an array:
+            </p>
+            <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+A[i] = *(A + i)</pre>
+            <p>
+                And to get the address you use this formula: 
+            </p>
+            <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+&A[i] = A + i</pre>
         </div>
         
 
@@ -316,7 +335,7 @@ int main()
         <!-- FUNCTION OVERLOADING ------------------------------------------------------------------------------>
         <div id="function_overloading_with_pointer_arguments" class="content">
             <h2>Function overloading with pointer arguments</h2>
-            <h3>20.10.2019</h3>
+            <h3>26.10.2019</h3>
             <p>
                 Let's say we have a function that has pointer arguments, and has been overloaded:
             </p>
