@@ -20,6 +20,7 @@
                 <li><a href="#default_parameters">Default parameters</a></li>
                 <li><a href="#inline_functions">Inline functions</a></li>
                 <li><a href="#function_overloading_with_pointer_arguments">Function overloading with pointer arguments</a></li>
+                <li><a href="#the_static_keyword">The static keyword</a></li>
             </ol>
         </div>
         
@@ -27,7 +28,7 @@
         <!-- USE A POINTER AS AN ARRAY ------------------------------------------------------------------------------>
         <div id="use_a_pointer_as_an_array" class="content">
             <h2>Use a pointer as an array</h2>
-            <h3>26.10.2019</h3>
+            <h4>26.10.2019</h4>
             <p>
                 An array is basically a<mark> constant address/pointer with contiguous memory.</mark>
                 There is a simple formula on how to access the elements through a pointer or an array:
@@ -45,16 +46,16 @@ A[i] = *(A + i)</pre>
         <!-- CONST MODIFIER ON TYPES ------------------------------------------------------------------------------>
         <div id="const_modifier_on_types" class="content">
             <h2>Const modifier on types</h2>
-            <h3>20.10.2019</h3>
+            <h4>20.10.2019</h4>
             <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
 int* const ptr</pre>
             <p>
-                Address is modifiable. Value is not modifiable.
+                Address is not modifiable. Value is modifiable.
             </p>
             <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
 const int* ptr</pre>
             <p>
-                Address is not modifiable. Value is modifiable.
+                Address is modifiable. Value is not modifiable.
             </p>
         </div>
 
@@ -62,7 +63,7 @@ const int* ptr</pre>
         <!--HOW BOOL WORKS ------------------------------------------------------------------------------>
         <div id="how_bool_works" class="content">
             <h2>How bool works</h2>
-            <h3>20.10.2019</h3>
+            <h4>20.10.2019</h4>
             <p>For the type <span class="codeSnippet">bool</span>, 0 is interpreted as <span class="codeSnippet">false</span> and every other value as <span class="codeSnippet">true</span>.</p>
             <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
 if(0) // false
@@ -88,7 +89,7 @@ if(-892) // true
         <div id="static_array_initialization" class="content">
             
             <h2>Static array initialization</h2>
-            <h3>20.10.2019</h3>
+            <h4>20.10.2019</h4>
 
             <p>
                 This is how you initialize a basic array:
@@ -165,6 +166,11 @@ int myArray[SIZE] = { 0 };</pre>
             <p>
                 This will just replace every occurence of the <span class="codeSnippet">SIZE</span> with the value 10
             </p>
+
+
+            <h3 class="splitter">2D array initialization</h3>
+
+
             <p>
                 Initializing 2d arrays or array-of-arrays works pretty much the same way:
             </p>
@@ -198,7 +204,8 @@ int arr[2][] =
     { }
 }</pre>    
             <p>
-                How many columns should it initialize with 0? It doesn't know, and that's why you can't do that.
+                From the formula: <span class="codeSnippet">*((int*)A + i * WIDTH + j</span>. 
+                It has to know the <span class="codeSnippet">WIDTH</span> at compile time, which is not the case.
             </p>
             <div class="infBox note">
                 <h4>Note</h4>
@@ -216,7 +223,7 @@ int arr[2][] =
         <!-- DEFAULT PARAMETETS ------------------------------------------------------------------------------>
         <div id="default_parameters" class="content">
             <h2>Default parameters</h2>
-            <h3>20.10.2019</h3>
+            <h4>20.10.2019</h4>
             <a href="https://www.learncpp.com/cpp-tutorial/77-default-arguments/" class="small">Source</a> 
             <p>
                 Default parameters are parameters that have a default value with the user doesn't give any argument.
@@ -281,7 +288,7 @@ void printValues(int x, int y=20);</pre>
         <!-- INLINE FUNCTIONS ------------------------------------------------------------------------------>
         <div id="inline_functions" class="content">
             <h2>Inline functions</h2>
-            <h3>20.10.2019</h3>
+            <h4>20.10.2019</h4>
             <a href="https://www.learncpp.com/cpp-tutorial/75-inline-functions/" class="small">Source</a>
             <p>
                 Every time a function is called, there is a certain amount of performance overhead that occurs. 
@@ -335,7 +342,7 @@ int main()
         <!-- FUNCTION OVERLOADING ------------------------------------------------------------------------------>
         <div id="function_overloading_with_pointer_arguments" class="content">
             <h2>Function overloading with pointer arguments</h2>
-            <h3>26.10.2019</h3>
+            <h4>26.10.2019</h4>
             <p>
                 Let's say we have a function that has pointer arguments, and has been overloaded:
             </p>
@@ -360,6 +367,203 @@ func(3, NULL);
                 <span class="codeSnippet">nullptr</span> is an instance of a pointer type.
                 The same way  <span class="codeSnippet">true</span> and <span class="codeSnippet">false</span> are instances of the type <span class="codeSnippet">bool</span>.
             </p>
+        </div>
+
+
+
+
+
+
+        <!-- The static keyword ------------------------------------------------------------------------------>
+        <div id="the_static_keyword" class="content">
+            <h2>The static keyword</h2>
+            <h4>26.7.2020</h4>
+            <p>
+                The meaning of static depends on context, there are the C ways of using the static keyword (static local varibales, internal linkage).
+                C++ introduces two more uses for the static keyword when applied to classes: static member variables, and static member functions. Fortunately, these uses are fairly straightforward. 
+            </p>
+            <h3 class="splitter">The C way</h3>
+            <h3>Static local variables</h3>
+            <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+void func() 
+{
+    static int x = 0;
+    printf("%d", x);
+    x++;
+}</pre>
+            <p>
+                Here the variable <span class="codeSnippet">x</span> will get 0 as the initial value, and every time you call the function
+                <span class="codeSnippet">func()</span> it will print the value of x and increment it, ie. it will "remember" it's previous value.
+            </p>
+
+            <h3>Global space static</h3>
+            <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+static int x;
+
+int main() 
+{
+    printf("x has the value %d and it's static!", x);
+    return 0;
+}</pre>
+            <p>
+                By declaring the variable <span class="codeSnippet">x</span> as static we say that the variable is only visible in that file.
+                This works the same way with functions:
+            </p>
+            <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+static void func() 
+{
+    printf("I'm a static function!\n");
+}
+
+int main() 
+{
+    func();
+    return 0;
+}</pre>
+            <h3 class="splitter">The C++ way</h3>
+            <!--<hr/>-->
+
+            <p>
+                Then there is the <span style="font-style: italic;">C++ way</span>. The static member variables are shared with all class objects, and don't even require an object.<br/>
+                They are not attached to any particular object.
+            </p>
+            <h3>Static member variables</h3>
+            <p>
+                You declare a static member variable in the class declaration, but define it outside of the class.
+            </p>
+            <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+class SomeClass 
+{
+public:
+    static int s_myStaticVar;
+};
+
+int SomeClass::s_myStaticVar = 0;
+
+int main() 
+{
+    SomeClass sc;
+
+    sc.s_myStaticVar = 10;
+    std::cout << "Call by object: " << sc.s_myStaticVar << std::endl;
+    std::cout << "Call by class: " << SomeClass::s_myStaticVar << std::endl;
+    return 0;
+}
+</pre>
+            <p>
+                The output is:
+            </p>
+            <p class="output">
+                Call by object: 10<br/>
+                Call by class: 10
+            </p>
+
+            <p>
+                Yes the definition is rather weird, but this even works with member variables under private access specifiers!<br/>
+                There are a few shortcuts to the above. First, when the static member is a const integral type (which includes char and bool) or a const enum, 
+                the static member can be initialized inside the class definition:
+            </p>
+            <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+class SomeClass
+{
+public:
+    static const int s_value{ 4 }; // a static const int can be declared and initialized directly
+};</pre>
+            <p>
+                In the above example, because the static member variable is a const int, no explicit definition line is needed.<br/>
+                Second, static constexpr members can be initialized inside the class definition:
+            </p>
+            <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+#include <array>
+
+class Whatever
+{
+public:
+    static constexpr double s_value{ 2.2 }; // ok
+    static constexpr std::array<int, 3> s_array{ 1, 2, 3 }; // this even works for classes that support constexpr initialization
+};</pre>
+            <h3>Static member functions</h3>
+            <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+class Something
+{
+private:
+    static int s_value;
+public:
+    static int getValue() { return s_value; } // static member function
+};
+    
+int Something::s_value{ 1 }; // initializer
+    
+int main()
+{
+    std::cout << Something::getValue() << '\n';
+}</pre>
+            <p>
+                In this case, we can’t access <span class="codeSnippet">Something::s_value</span> directly from <span class="codeSnippet">main()</span>, because it is private. Thus we create a getter by defining a static member function that gets us the value of <span class="codeSnippet">s_value</span>
+                Because static member functions are not attached to a particular object, they can be called directly by using the class name and the scope resolution operator. Like static member variables, they can also be called through objects of the class type, though this is not recommended.
+            </p>
+            <br>
+            <p>
+                Static member functions can also be defined outside of the class declaration. This works the same way as for normal member functions.
+            </p>
+            <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;">
+class IDGenerator
+{
+private:
+    static int s_nextID; // Here's the declaration for a static member
+    
+public:
+        static int getNextID(); // Here's the declaration for a static function
+};
+    
+// Here's the definition of the static member outside the class.  Note we don't use the static keyword here.
+// We'll start generating IDs at 1
+int IDGenerator::s_nextID{ 1 };
+    
+// Here's the definition of the static function outside of the class.  Note we don't use the static keyword here.
+int IDGenerator::getNextID() { return s_nextID++; } 
+    
+int main()
+{
+    for (int count{ 0 }; count < 5; ++count)
+        std::cout << "The next ID is: " << IDGenerator::getNextID() << '\n';
+    
+    return 0;
+}</pre>
+            <p>
+                This program prints:
+            </p>
+
+            <p class="output">
+                The next ID is: 1<br/>
+                The next ID is: 2<br/>
+                The next ID is: 3<br/>
+                The next ID is: 4<br/>
+                The next ID is: 5
+            </p>
+
+            <div class="infBox note">
+                <h4>Note</h4>
+                <p>
+                    Static member functions have two interesting quirks worth noting. First, because static member functions are not attached to an object, they have no this pointer! This makes sense when you think about it -- the this pointer always points to the object that the member function is working on. Static member functions do not work on an object, so the this pointer is not needed. 
+                </p>
+                <p>
+                    Second, static member functions can directly access other static members (variables or functions), but not non-static members. This is because non-static members must belong to a class object, and static member functions have no class object to work with!
+                </p>
+            </div>
+            
+            <div class="infBox note">
+                <h4>Note</h4>
+                <p>
+                    Be careful when writing classes with all static members. Although such “pure static classes” (also called “monostates”) can be useful, they also come with some potential downsides.
+                </p>
+                <p>
+                    First, because all static members are instantiated only once, there is no way to have multiple copies of a pure static class (without cloning the class and renaming it). For example, if you needed two independent IDGenerator objects, this would not be possible with a single pure static class.
+                </p>
+                <p>
+                    Second, in the lesson on global variables, you learned that global variables are dangerous because any piece of code can change the value of the global variable and end up breaking another piece of seemingly unrelated code. The same holds true for pure static classes. Because all of the members belong to the class (instead of object of the class), and class declarations usually have global scope, a pure static class is essentially the equivalent of declaring functions and global variables in a globally accessible namespace, with all the requisite downsides that global variables have.
+                </p>
+            </div>
         </div>
     </body>
 </html>
