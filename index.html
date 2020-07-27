@@ -21,6 +21,7 @@
                 <li><a href="#inline_functions">Inline functions</a></li>
                 <li><a href="#function_overloading_with_pointer_arguments">Function overloading with pointer arguments</a></li>
                 <li><a href="#the_static_keyword">The static keyword</a></li>
+                <li><a href="#aggregation_and_composition">Aggregation and composition</a></li>
             </ol>
         </div>
         
@@ -377,7 +378,7 @@ func(3, NULL);
         <!-- The static keyword ------------------------------------------------------------------------------>
         <div id="the_static_keyword" class="content">
             <h2>The static keyword</h2>
-            <h4>26.7.2020</h4>
+            <h4>26.07.2020</h4>
             <p>
                 The meaning of static depends on context, there are the C ways of using the static keyword (static local varibales, internal linkage).
                 C++ introduces two more uses for the static keyword when applied to classes: static member variables, and static member functions. Fortunately, these uses are fairly straightforward. 
@@ -564,6 +565,46 @@ int main()
                     Second, in the lesson on global variables, you learned that global variables are dangerous because any piece of code can change the value of the global variable and end up breaking another piece of seemingly unrelated code. The same holds true for pure static classes. Because all of the members belong to the class (instead of object of the class), and class declarations usually have global scope, a pure static class is essentially the equivalent of declaring functions and global variables in a globally accessible namespace, with all the requisite downsides that global variables have.
                 </p>
             </div>
+        </div>
+
+
+
+
+        <!-- Aggregation and composition ------------------------------------------------------------------------------>
+        <div id="aggregation_and_composition" class="content">
+            <h2>Aggregation and composition</h2>
+            <h4>27.06.2020</h4>
+            <a href="https://softwareengineering.stackexchange.com/questions/61376/aggregation-vs-composition" class="small">Source</a> 
+
+            <p>Object composition refers to object relationships, it is further subdevided into aggregation and composition:</p>
+
+            <h3 class="splitter">Aggregation</h3>
+            <p><mark>A "uses" B, B exists independently (conceptually) from A</mark></p>
+            <p>To qualify as an aggregation, a whole object and its parts must have the following relationship:</p>
+            <ul>
+                <li>The part (member) is part of the object (class)</li>
+                <li>The part (member) can belong to more than one object (class) at a time</li>
+                <li>The part (member) does not have its existence managed by the object (class)</li>
+                <li>The part (member) does not know about the existence of the object (class)</li>
+            </ul>
+        
+            <h3 class="splitter">Composition</h3>
+            <p><mark>A "owns" B, B has no meaning or purpose in the system without A</mark></p>
+            <p>
+                To qualify as a composition, an object and a part must have the following relationship:<br>
+
+                <ul>
+                    <li>The part (member) is part of the object (class)</li>
+                    <li>The part (member) can only belong to one object (class) at a time</li>
+                    <li>The part (member) has its existence managed by the object (class)</li>
+                    <li>The part (member) does not know about the existence of the object (class)</li>
+                </ul>
+            </p>
+            
+            
+            
+
+            <pre class="prettyprint lang-cpp " style="background-color: #F9F9F9;border: none;border-left: #71E071 solid 3px;padding-left:8px;margin: 12px 0px;"></pre>
         </div>
     </body>
 </html>
